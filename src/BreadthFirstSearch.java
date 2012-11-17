@@ -8,6 +8,8 @@ public class BreadthFirstSearch implements Search<State> {
 	private State init;
 	private Stack<State> path;
 	public boolean found;
+	private int nodesExapnded;
+	private long startTime;
 	@Override
 	public void SetGoal(State goalState) throws StateException {
 		if (goalState==null){
@@ -17,14 +19,16 @@ public class BreadthFirstSearch implements Search<State> {
 	}
 	
 	private boolean isGoal(State node){
-		return (node.MissionariesAtRight==3 && node.CannibalsAtLeft==0);
+		return (node.compare(goal)==0);
 	}
 	
 	public void printPath() throws StateException{
 		if (path==null){
 			throw new StateException("No Paths found");
 		}
-		System.out.println(path.size());
+		System.out.println(" The search took :"+(System.nanoTime()-startTime));
+		System.out.println(" Nodes expanded :"+nodesExapnded);
+		System.out.println(" Number of moves: "+path.size());
 		while (!path.isEmpty()){
 			System.out.println(path.pop().toString());
 		}
@@ -32,12 +36,13 @@ public class BreadthFirstSearch implements Search<State> {
 	}
 	
 	public void BeginSearch() throws StateException{
+		startTime = System.nanoTime();
 		Search(init);
 	}
 	
 	private void Search(State node) throws StateException{
-		expandChildren(node);
 		if (!found){
+		expandChildren(node);
 		for (int i = 0 ; i < node.children.size();  ++i){
 			Search(node.children.get(i));
 			}
@@ -56,6 +61,7 @@ public class BreadthFirstSearch implements Search<State> {
 				temp.MoveBoat();
 				if (temp.Valid())
 				{
+					nodesExapnded++;
 					node.children.add(temp);
 					if (isGoal(temp))
 					{

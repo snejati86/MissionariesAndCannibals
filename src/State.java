@@ -20,8 +20,7 @@ public class State  {
 		Boat = boat;
 	}
 	/* Copy constructor */
-	public State(State clone)
-	{
+	public State(State clone){
 		this.MissionariesAtLeft=clone.MissionariesAtLeft;
 		this.MissionariesAtRight=clone.MissionariesAtRight;
 		this.CannibalsAtLeft=clone.CannibalsAtLeft;
@@ -69,57 +68,6 @@ public class State  {
 			node.Boat=BoatPlacement.left;
 	}
 	
-//	public void search(State node){
-//		node.ExpandChildren();
-//		for (int i = 0 ; i < node.children.size();++i)
-//		{
-//			search(node.children.get(i));
-//		}
-//	}
-	
-//	public void ExpandChildren(){
-//		children = new ArrayList<State>();
-//		for ( int i = 0 ; i < 3 ; ++i)
-//		{
-//			for ( int j = 0 ; i+j < 3 ; ++j)
-//			{
-//				if (i+j==0)
-//				{
-//					continue;
-//				}
-//				
-//				State copy = new State(this);
-//				if (this.Boat==BoatPlacement.left)
-//				{
-//				copy.CannibalsAtLeft-=j;
-//				copy.CannibalsAtRight+=j;
-//				copy.MissionariesAtLeft-=i;
-//				copy.MissionariesAtRight+=i;
-//				}
-//				else
-//				{
-//					copy.CannibalsAtLeft+=j;
-//					copy.CannibalsAtRight-=j;
-//					copy.MissionariesAtLeft+=i;
-//					copy.MissionariesAtRight-=i;	
-//				}
-//				copy.parent=this;
-//				MoveBoat(copy);
-//				if (copy.Valid())
-//				{
-//					copy.parent=this;
-//					this.children.add(copy);
-//					if (copy.Goal())
-//					{
-//						PrintPath(copy);
-//						System.exit(1);
-//						return ;
-//					}
-//				}
-//			
-//			}
-//		}
-//	}
 
 	private void PrintPath(State node) {
 		while (node.parent!=null)
